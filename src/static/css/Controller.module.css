@@ -1,0 +1,298 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9fa;
+    padding:0 15px;
+    min-width:240px;
+    color:#343434;
+    overflow-y:scroll;
+    overflow-x:auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+
+.container >div{
+    padding-top:15px;
+}
+
+.container input[type=text]{
+    border:0;
+    border-bottom: 1px solid #343434;
+    outline:0;
+
+    background-color: transparent;
+    font-size: 0.8rem;
+
+    color:#343434;
+    font-weight: 400;
+    text-align: center;
+}
+.container input[type=text].smallInput{
+    width:40px;
+}
+.container input[type=text].midInput{
+    width:60px;
+}
+
+.container input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    border: 2px solid #343434;
+    background: #f9f9fa;
+    margin-top: -4px;
+}
+
+.container input[type=range]:hover {
+    opacity: 0.8;
+}
+
+
+.container input[type=range]:focus {
+    outline: none;
+}
+
+.container input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ddd;
+}
+.container select{
+    padding: 5px;
+    font-family: inherit;  
+    border: 0;
+    border-bottom: solid 1px #343434;
+    border-radius: 0px; 
+    background-color: transparent;
+
+    color:#343434;
+    
+}
+.container select:focus{
+    outline:0;
+}
+
+.optionId{
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    margin-bottom:10px;
+}
+.inputId{
+    
+}
+.tabContainer{
+    margin-bottom:10px; 
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10px;
+    padding-bottom:5px;
+}
+.tabContainer> button{
+    padding:0 15px;
+    font-size:1.4rem;
+    color:#343434;
+    transition:0.3s;
+    border-radius: 5px;
+}
+.tabContainer> button:hover{
+    transform:translateY(-3px);
+}
+
+.tabContainer> button.selectedTab{
+    box-shadow:  inset 3px 3px 5px -2px rgba(0, 0, 0, 0.1),
+    inset -3px -3px 10px 5px #e0e0e288;
+}
+
+
+.optionContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 0.8rem;
+
+
+}
+
+
+.optionRows{
+    display: flex;
+    justify-content: center;
+    margin-bottom:15px;
+    flex-direction: column;
+}
+.optionRows .small{
+    display:flex;
+    justify-content: center;
+}
+.optionRows .small>div{
+    position:relative;
+}
+.optionRows .small span{
+    display:inline-block;
+    text-align:right;
+    text-align: center;
+    width:20px;
+    margin-left:10px;
+}
+
+
+.optionRows .small>div>button{
+    font-size:0.6rem;
+    position:relative;
+    margin:0;
+    padding:0;
+    color:#343434;
+    overflow:hidden;
+    transition: 0.2s;
+}
+.optionRows .small>div>button:hover{
+    opacity: 0.6;
+}
+
+.optionRows .selectContainer{
+    width:120px;
+    position:absolute;
+    top:-120%;
+    z-index: 1;
+}
+
+.selectContainer>button{
+    
+    width:25px;
+    height:25px;
+    padding:3px;
+
+    border:1px solid #343434;
+    background-color: #fff;
+
+    font-size:0.6rem;
+    color:#343434;
+
+    transition: color 0.3s, background-color 0.3s;
+}
+.selectContainer>button:hover{
+    background-color: #343434;
+    color:#fff
+}
+
+
+.optionContainer input[type=range]{
+    -webkit-appearance: none;
+    background-color: transparent;
+    width:100px;
+}
+
+.optionContainer input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 3px;
+    background: #d2d2d2;
+    border: none;
+    border-radius: 3px;
+}
+
+
+.optionRows>div button{
+    margin:5px;
+    font-size:1.4rem;
+    color:#343434;
+    transition:0.3s;
+    border-radius: 5px;
+}
+.optionRows>div button:not(.selected, .locked):hover{
+    transform:translateY(-3px);
+}
+button.selected{
+    box-shadow:  inset 3px 3px 5px -2px rgba(0, 0, 0, 0.1),
+    inset -3px -3px 10px 5px #e0e0e288;
+}
+
+button.locked{
+    opacity: 0.5;
+}
+
+
+.fontController{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.fontController>.decorationController{
+    display:flex;
+}
+
+
+
+.colorPicker{
+    position:relative;
+    width:25px;
+    height:25px;
+    margin: 10px;
+
+    border-radius: 5px;
+    border:1px solid #343434;
+}
+.picker{
+    position:fixed;
+    right:225px;
+    z-index:10;
+}
+
+.borderController{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.shadowController{
+    display:flex;
+    justify-content: space-between;
+}
+
+.shadowExampleContainer{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:10px;
+    width:100px;
+    height:100px;
+    border:1px solid #343434;
+    border-radius: 10px;
+    background-color: #fff;
+    cursor:crosshair;
+}
+.shadowExample{
+    width:40px;
+    height:40px;
+    background-color: #343434;
+    pointer-events: none;
+}
+.shadowOptionContainer{
+    display: flex;
+    flex-direction: column;
+    width:110px;
+    padding:5px;
+    font-size:0.8em;
+ 
+}
+.shadowOptionContainer .colorPicker{
+
+    margin:0;
+    margin-top:15px;
+    align-self: flex-end;
+}
+
+.shadowOptionContainer input[type=range]{
+    width:100px;
+}
+.flexController>.optionRows>div>button{
+    font-size:1.1rem;
+    margin:5px 2px;
+}
+.spaceBetween{
+    display:flex;
+    justify-content: space-between;
+}

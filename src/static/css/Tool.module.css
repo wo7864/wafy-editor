@@ -1,0 +1,125 @@
+.toolContainer {
+    position: relative;
+    width: 50px;
+    z-index: 10;
+}
+
+.defaultToolContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 50px;
+    height: 100%;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    background-color: #f9f9fa;
+    z-index: 2;
+}
+
+.defaultToolContainer button {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+    border: 0;
+    background-color: transparent;
+    z-index: 2;
+}
+
+.expansionToolContainer {
+    position: absolute;
+    left: 50px;
+    top: 0px;
+    min-width: 200px;
+    height: 100%;
+    background-color: #f9f9fa;
+    border-left: 2px solid #e9e9ea;
+    z-index: 0;
+    transform: translateX(-100%);
+    transition: 0.5s;
+}
+
+.expansionToolContainer.opened {
+    transform: translateX(0%);
+}
+
+.assetsContainer {
+    width: 250px;
+    height: 100%;
+    padding: 10px;
+    color: #343434;
+    overflow-x: scroll;
+}
+
+.assetsContainer::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.assetsContainer::-webkit-scrollbar-track {
+    background: rgba(240, 240, 230, 0.8);
+}
+
+.assetsContainer::-webkit-scrollbar-track-piece {
+    display: none;
+}
+
+.assetsContainer::-webkit-scrollbar-button {
+    display: none;
+}
+
+/* Add a thumb */
+
+.assetsContainer::-webkit-scrollbar-thumb {
+    background: rgba(150, 150, 150, 0.3);
+    border-radius: 5px;
+}
+
+.assetsContainer img {
+    width: 100px;
+    object-fit: cover;
+}
+
+.tabContainer {
+    display: flex;
+    margin-bottom:10px;
+}
+
+.tabContainer button {
+    flex: 1;
+    height: 30px;
+    color: #343434;
+    border: 1px solid #343434;
+    text-transform: capitalize;
+}
+
+.tabContainer button:hover, .tabContainer button.selected-tab {
+    color: #fff;
+    background-color: #343434;
+}
+
+.contentsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    row-gap: 10px;
+}
+
+.contentsContainer>button {
+    padding: 0;
+    width: 100px;
+    height: 64px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.contentsContainer img {
+    width: 100%;
+    height: 100%;
+    transition: 0.3s;
+}
+
+.contentsContainer img:hover {
+    transform: scale(1.2, 1.2);
+}

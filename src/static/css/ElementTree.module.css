@@ -1,0 +1,97 @@
+.treeContainer {
+    width: 250px;
+    height: 100%;
+    padding: 10px;
+    color: #343434;
+    overflow-x: scroll;
+}
+
+.treeContainer div {
+    font-size: 1rem;
+}
+
+.tree {
+    white-space: nowrap;
+}
+.elementButton{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    width:90%;
+    border-radius: 5px;
+    padding:5px;
+    transition:0.2s;
+    height:30px;
+    margin:0px 0px;
+
+    text-align: left;
+    
+}
+.elementButton:hover, .over{
+    box-shadow: inset 3px 3px 5px -2px rgb(0 0 0 / 20%), inset -3px -3px 10px 5px #e0e0e244
+}
+.elementButton.selected{
+    box-shadow: inset 3px 3px 5px -2px rgb(0 0 0 / 20%), inset -3px -3px 10px 5px #e0e0e2aa
+}
+.elementButton *{
+    pointer-events: none;
+}
+.toggleButton{
+    font-size:1.1rem;
+    transition: transform 0.2s;
+}
+.toggleButton.closed:hover{
+    transform: translateX(3px);
+}
+.toggleButton.opened:hover{
+    transform: translateY(-3px);
+}
+.treeIcon {
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+}
+
+
+.betweenButton{
+    width:90%;
+    margin-bottom:-8px;
+    height:10px;
+    z-index:5;
+    transition:0.3s;
+    
+}
+.betweenButton.over{
+    height:30px;
+    margin-bottom:3px;
+
+}
+
+.treeContainer::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.treeContainer::-webkit-scrollbar-track {
+    background: rgba(240, 240, 230, 0.8);
+}
+
+.treeContainer::-webkit-scrollbar-track-piece {
+    display: none;
+}
+
+.treeContainer::-webkit-scrollbar-button {
+    display: none;
+}
+
+/* Add a thumb */
+
+.treeContainer::-webkit-scrollbar-thumb {
+    background: rgba(150, 150, 150, 0.3);
+    border-radius: 5px;
+}
+
+
+.dragStart{
+    opacity: 0.4;
+}

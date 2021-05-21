@@ -1,0 +1,349 @@
+.modal-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position:absolute;
+    width:100vw;
+    height:100vh;
+    left:0px;
+    top:0px;
+
+    background:rgba(0,0,0, 0.8);
+
+    z-index:20;
+
+}
+.animation-container{
+    display:flex;
+    flex-direction: column;
+
+    width:80%;
+    height:80%;
+    background-color: #fff;
+    color:#fff;
+    border:3px solid #343434;
+    border-radius: 10px;
+}
+.animation-header{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    height:40px;
+    background-color: #343434;
+    padding:8px 10px;
+}
+.animation-header .target-element-id{
+    color:#fff;
+    margin-right:20px;
+    font-size:1.2rem;
+    font-family: "Open Sans";
+    font-weight: 700;
+}
+
+
+
+.animation-header .animation-event{
+    display: flex;
+    align-items: center;
+    position:relative;
+
+    text-transform: capitalize;
+    overflow:hidden;
+    padding:0px;
+}
+.animation-header .animation-event .selected-event{
+    display:flex;
+    align-items: center;
+    background-color: #343434;
+    height:21px;
+    font-family: "Open Sans";
+    font-weight: 700;
+    color:#fff;
+    z-index:1;
+
+}
+.animation-header .animation-event .selected-event>svg{
+    transition:transform 0.3s;
+    margin-right:10px;
+}
+.animation-header .animation-event .selected-event>svg:hover{
+    transform:translateX(5px);
+}
+.animation-header .animation-event .selected-event>svg.open{
+    transform:translateX(5px) rotateZ(180deg);
+}
+.animation-header .event-list-container{
+    display:flex;
+    align-items: center;
+
+    min-width:110px;
+    position:relative;
+
+    background-color: #DBEEFE;
+    border:1px solid #343434;
+    border-radius:10px;
+    padding:0px 0px;
+
+    text-transform: capitalize;
+    transition: 0.3s;
+
+
+}
+.animation-header .event-list-container.close{
+    transform:translateX(-105%);
+}
+.animation-header .event-list-container>button{
+    padding:0 10px;
+    transition: 0.3s;
+    height:100%;
+    font-family: "Open Sans";
+    color: #343434;
+
+}
+.animation-header .event-list-container>button:hover{
+    background-color: #343434;
+    color:#fff;
+}
+
+.animation-detail-contents-container{
+    display: flex;
+    align-items: center;
+    flex:1;
+}
+
+
+
+.animation-contents{
+    display:flex;
+    flex:1;
+    height:inherit;
+}
+
+.animation-contents>.list-container{
+    display: flex;
+    flex-direction: column;
+    width:180px;
+    border-right:1px solid #343434;
+    overflow-y:scroll;
+}
+.animation-contents>.list-container>.tab-container{
+    display: flex;
+    flex-direction: column;
+
+    width:40px;
+    border-right:1px solid #343434;
+}
+.animation-contents>.list-container>.type-container{
+    display: flex;
+    flex-direction: column;
+
+}
+.animation-contents>.list-container>.type-container>.type-title{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    padding:8px 10px;
+
+    background-color: #bce0fd88;
+    color:#333;
+    border-bottom:1px solid #bce0fd;
+
+    font-size: 0.7rem;
+    font-weight: 400;
+    
+}
+.animation-contents>.list-container>.type-container>button{
+    display: flex;
+    align-items: center;
+    position:relative;
+
+    width:100%;
+    height:50px;
+    border-bottom:1px solid #bce0fd;
+    transition: background-color 0.3s;
+    overflow:hidden;
+
+}
+
+.animation-contents>.list-container>.type-container>button>img{
+    position: relative;
+    left:0px;
+    margin-left:5px;
+    width:40px;
+    height:40px;
+    transition:left 0.2s;
+}
+.animation-contents>.list-container>.type-container>button>*:nth-child(2){
+    display:block;
+    flex:1;
+    text-align: center;
+    text-transform: capitalize;
+    transition:transform 0.3s, color 0.2s;
+}
+
+.animation-contents>.list-container>.type-container>button:hover{
+    background-color: #343434;
+}
+.animation-contents>.list-container>.type-container>button:hover>img{
+    left:-60px;
+    color:#fff;
+}
+.animation-contents>.list-container>.type-container>button:hover>*:nth-child(2){
+    transform:translateX(-40px) scale3d(1.5, 1.5, 1.5);
+    color:#fff;
+}
+
+
+
+.animation-contents>.right-container{
+    flex:1;
+    display:flex;
+    flex-direction: column;
+}
+
+.animation-contents>.right-container>.preview-container{
+    flex:1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.animation-contents>.right-container>.preview-container>.target-element{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+    width:200px;
+    height:80px;
+
+    background-color: #343434;
+    border-radius: 5px;
+    color:#fff;
+
+    font-size:1.2rem;
+}
+
+
+.animation-contents>.right-container>.animation-detail-container{
+    height:250px;
+    border-top:1px solid #343434;
+}
+
+.animation-detail-container{
+    display:flex;
+    flex-direction: column;
+    background-color: #f9f9fa;
+
+}
+.animation-detail-container .header{
+    padding-top:15px;
+    padding-left:15px;
+    height:45px;
+}
+
+.animation-detail-container .header>span{
+
+    color:#343434;
+
+    font-family: "Open Sans";
+    font-weight: 700;
+    font-size:1.4rem;
+
+}
+
+.animation-detail-container .contents-container{
+    flex:1;
+    display:flex;
+    flex-direction: column;
+    flex-wrap:wrap;
+    padding:0px 15px;
+}
+
+.animation-detail-container>.contents-container div{
+    margin:5px 0px;
+}
+.animation-detail-container>.contents-container div>span{
+    color:#343434;
+    font-size:0.8rem;
+}
+.animation-detail-container>.contents-container div>span:nth-child(1){
+    margin-right:10px;
+}
+
+.animation-detail-container>.contents-container div>input[type=text]{
+    width:30px;
+    border:0;
+    border-bottom: 1px solid #343434;
+    outline:0;
+
+    background-color: transparent;
+    font-size: 0.8rem;
+
+    color:#343434;
+    font-weight: 400;
+    text-align: center;
+
+}
+.animation-detail-container>.contents-container div>select{
+    padding: 5px;
+    font-family: inherit;  
+    border: 0;
+    border-bottom: solid 1px #343434;
+    border-radius: 0px; 
+    background-color: transparent;
+
+    color:#343434;
+}
+.animation-detail-container>.contents-container div>select:focus{
+    outline:0;
+}
+.animation-detail-container>.animation-detail-contents{
+    padding:10px;
+}
+
+.animation-detail-container>.animation-detail-contents>div>*:nth-child(1){
+    display:inline-block;
+    width:80px;
+}
+
+.animation-detail-container>.animation-detail-contents input[type=text]{
+    border:0;
+    outline:0;
+    background-color: transparent;
+
+    width:20px;
+    border-bottom:1px solid #343434;
+    text-align: center;
+
+    color:#343434;
+    font-weight: bold;
+}
+.animation-detail-container>.animation-detail-contents>div>*:nth-child(3){
+    color:#343434;
+    font-size: 0.8rem;
+}
+
+.asset-images-container{
+    position:relative;
+    width:100px;
+}
+
+.asset-images-container>.images-modal{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    position:absolute;
+    top:-20px;
+    left:0px;
+    transform:translateY(-100%);
+
+    padding:10px;
+    border:2px solid #343434;
+    border-radius: 5px;
+    background-color: #fff;
+}
+.asset-images-container>.images-modal img{
+    width:100px;
+    height:60px;
+}

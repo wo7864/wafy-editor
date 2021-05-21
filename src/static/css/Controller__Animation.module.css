@@ -1,0 +1,113 @@
+.container{
+    position: relative;
+}
+.tab{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:15px;
+}
+.tab>button{
+    padding:5px 10px;
+    font-size:0.8rem;
+    color:#343434;
+    text-transform: capitalize;
+    border-radius: 5px;
+    transition:0.3s;
+}
+
+.tab> button:hover{
+    transform:translateY(-3px);
+}
+
+.tab> button.selectedTab{
+    box-shadow:  inset 3px 3px 5px -2px rgba(0, 0, 0, 0.1),
+    inset -3px -3px 10px 5px #e0e0e288;
+}
+
+
+.animationDetail{
+    margin-top:10px;
+}
+
+.optionRows{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    height:35px;
+    text-transform: capitalize;
+}
+
+.normalButton{
+    font-size:1.4rem;
+    color:#343434;
+    transition:0.3s;
+    border-radius: 5px;
+}
+.normalButton:hover{
+    transform:translateY(-3px);
+}
+
+.selectAnimation{
+    width:100%;
+    padding:5px 10px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom:1px solid #343434;
+    font-weight: 400;
+
+    text-transform: capitalize;
+
+}
+
+.listContainer{
+    display:flex;
+    flex-direction: column;
+    background-color: #fff;
+    border:1px solid #343434;
+
+    box-shadow: 3px 3px 3px -1px #343434;
+    overflow: hidden;
+}
+.listContainer>button{
+    position: relative;
+    height:40px;
+    padding:0px 10px;
+    font-size:0.7rem;
+    text-align: left;
+    text-transform: capitalize;
+    border-bottom:1px solid #e0e0e2;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.listContainer>button:hover{
+    transform: translate(0px, -3px);
+    box-shadow: 0px 3px 3px -1px #343434;
+}
+
+
+
+.imagesModal{
+    position: fixed;
+    padding:10px;
+
+    right:240px;
+    height:400px;
+    
+    background-color: #f9f9fa;
+    height: 100%;
+    top: 45px;
+    min-width: 200px;
+    height: 100%;
+    background-color: #f9f9fa;
+    border-right: 2px solid #e9e9ea;
+    z-index: 0;
+
+}
+
+.imagesModal img{
+    width:100%;
+    height:100%;
+}
