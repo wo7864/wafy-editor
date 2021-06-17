@@ -1,15 +1,5 @@
 import {  action, makeObservable, observable } from "mobx";
 
-const paramsAttrProperty = [
-    'required',
-    'default',
-    'detail',
-    'example',
-    'Unit',
-    'type',
-    'value',
-]
-
 const animationAttrProperty = [
     'target',
     'duration',
@@ -41,19 +31,6 @@ const animationsAttrProperty = [
     'dblclick',
 ]
 
-
-export class ParamsAttr {
-    constructor(){
-        const observableJson = {}
-        paramsAttrProperty.forEach(attr => {
-            this[attr] = null
-            observableJson[attr] = observable
-        })
-        makeObservable(this, observableJson);
-
-    }
-    
-}
 
 export class Animation {
     constructor(){

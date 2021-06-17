@@ -16,7 +16,7 @@ export class ElementStore {
     resize;
 
     level = 0;
-    childElements = [];
+    children = [];
     selectedElem = null;
     tmpMousePos = {};
 
@@ -27,7 +27,7 @@ export class ElementStore {
 
     constructor(root) {
         makeObservable(this, {
-            childElements: observable,
+            children: observable,
             selectedElem: observable,
             isContextMenu: observable,
             select: action,
@@ -52,7 +52,7 @@ export class ElementStore {
 
         this.rootStore = root;
 
-        this.childElements = [
+        this.children = [
 
         ]
 
@@ -76,8 +76,8 @@ export class ElementStore {
     undo() {
         const data = this.history.undo();
         if (data) {
-            this.childElements.length = 0;
-            this.childElements.push(...data)
+            this.children.length = 0;
+            this.children.push(...data)
             this.selectedElem = data.filter(elem => elem.isSelect)[0]
         }
     }
@@ -85,8 +85,8 @@ export class ElementStore {
     redo() {
         const data = this.history.redo();
         if (data) {
-            this.childElements.length = 0;
-            this.childElements.push(...data)
+            this.children.length = 0;
+            this.children.push(...data)
             this.selectedElem = data.filter(elem => elem.isSelect)[0]
         }
     }
@@ -134,7 +134,7 @@ export class ElementStore {
             this.selectedElem = null;
         }
         this.isEditText = false;
-        const json = JSON.stringify(toJSON(this.childElements));
+        const json = JSON.stringify(toJSON(this.children));
         const filename = 'template.json'
         const file = new Blob([json], { type: 'text/plain' });
 
@@ -154,8 +154,8 @@ export class ElementStore {
     load() {
         const data = toOBJ(template)
         if (data) {
-            this.childElements.length = 0;
-            this.childElements.push(...data)
+            this.children.length = 0;
+            this.children.push(...data)
             this.selectedElem = data.filter(elem => elem.isSelect)[0]
         }
     }
@@ -217,17 +217,17 @@ export class ElementStore {
         element.select();
         this.selectedElem = element;
         if (index == null) {
-            parent.childElements.push(element)
+            parent.children.push(element)
         } else {
-            parent.childElements.splice(index, 0, element);
+            parent.children.splice(index, 0, element);
         }
-        this.history.act(this.childElements);
+        this.history.act(this.children);
     }
 
 
     remove = element => {
         if (!element) { console.error('remove // need element'); return; }
-        const preParent = this.findParent(this, element.id).childElements
+        const preParent = this.findParent(this, element.id).children
         const data = preParent.filter(child => child.id !== element.id);
         preParent.length = 0
         preParent.push(...data)
@@ -292,8 +292,8 @@ export class ElementStore {
     }
     traverse = (element, func) => {
 
-        if (!element.childElements) return;
-        element.childElements.forEach(child => {
+        if (!element.children) return;
+        element.children.forEach(child => {
             func(child, element);
             this.traverse(child, func);
         })
@@ -313,10 +313,10 @@ export class ElementStore {
     //     return null
     // }
     findElement = (element, id) => {
-        if (!element.childElements) return;
-        let result = element.childElements.filter(child => child.id === id)
+        if (!element.children) return;
+        let result = element.children.filter(child => child.id === id)
         if(result.length === 0){
-            result = element.childElements.map(child => this.findElement(child, id)).filter(item => item !== undefined)
+            result = element.children.map(child => this.findElement(child, id)).filter(item => item !== undefined)
         }
 
         return result[0]
@@ -342,7 +342,7 @@ export class ElementStore {
 
     addAnimation(event, anima) {
         this.selectedElem.animation.setAnimation(event, anima);
-        this.history.act(this.childElements);
+        this.history.act(this.children);
 
     }
 
@@ -351,13 +351,13 @@ export class ElementStore {
         this.selectedElem.contextMenu = false;
         this.selectedElem.deselect();
         this.selectedElem = null;
-        this.history.act(this.childElements);
+        this.history.act(this.children);
     }
 
     unLock() {
         this.selectedElem.isLock = false;
         this.selectedElem.contextMenu = false;
-        this.history.act(this.childElements);
+        this.history.act(this.children);
     }
 
 }

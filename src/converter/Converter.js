@@ -2,8 +2,8 @@ import { toUnderscore, addNumberUnit} from '../util/util'
 
 const traverse = (element, func) => {
 
-    if (!element.childElements) return;
-    element.childElements.forEach(child => {
+    if (!element.children) return;
+    element.children.forEach(child => {
         func(child, element);
         traverse(child, func);
     })
@@ -229,16 +229,16 @@ const AnimaCreator = (elements, HTML) => {
             const params = {};
             Object.keys(anima[event]).forEach(key => {
                 if(!anima[event][key]) return;
-                if (key === 'target' &&  anima[event][key].value === 'self')
+                if (key === 'target' &&  anima[event][key] === 'self')
                     params[key] = `#${element.id}`;
                 else if(key==='duration')
-                    params[key] = Number(anima[event][key].value)
+                    params[key] = Number(anima[event][key])
                 else
-                    params[key] = anima[event][key].value
+                    params[key] = anima[event][key]
             })
 
             const scroll = event === 'scroll' ?
-            `, ${anima[event].start.value}, ${anima[event].end.value}` : ''            
+            `, ${anima[event].start}, ${anima[event].end}` : ''            
             const animation =
             `
             const ${id}_${event} = ${element.animation[event].name}(${JSON.stringify(params)});

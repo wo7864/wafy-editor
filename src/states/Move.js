@@ -101,7 +101,7 @@ export default class Move {
     async relative(e) {
         const findSection = (element) => {
             if (element === this.element) return;
-            if (element.childElements === undefined) return;
+            if (element.children === undefined) return;
             if (!element.isCursorOnElement(mousePos, true)) return;
 
             target = element;
@@ -126,7 +126,7 @@ export default class Move {
 
 
         try {
-            await this.elementStore.traverse({ childElements: this.elementStore.childElements }, findSection);
+            await this.elementStore.traverse({ children: this.elementStore.children }, findSection);
         }
         catch (error) {
             console.error(error)
@@ -135,7 +135,7 @@ export default class Move {
         // 현재 부모가 같다면 같은 부모 내에서 순서바꾸기
         if (target === this.parent || (!this.parent.id && !target)) {
             const parent = target ?
-                target.childElements : this.elementStore.childElements;
+                target.children : this.elementStore.children;
             parent.some(child => {
                 if (this.element === child) return false;
                 const near = child.isCursorNearElement(mousePos);
@@ -181,7 +181,7 @@ export default class Move {
     }
 
     createVirtualGrid() {
-        const parent = this.elementStore.findParent(this.elementStore, this.element.id).childElements
+        const parent = this.elementStore.findParent(this.elementStore, this.element.id).children
 
         const gridX = [];
         const gridY = [];
@@ -204,7 +204,7 @@ export default class Move {
         const clientElement = document.querySelector(`#${this.element.id}`).getBoundingClientRect();
         const top = clientElement.top - window.innerHeight / 2
         const bottom = clientElement.bottom + window.innerHeight / 2
-        this.elementStore.traverse({ childElements: this.elementStore.childElements }, (child) => {
+        this.elementStore.traverse({ children: this.elementStore.children }, (child) => {
             if (child.tag !== 'section') return;
             if (child === this.element) return;
             if (this.parent === child) return;
@@ -282,7 +282,7 @@ export default class Move {
             if (!element.isCursorOnElement(mousePos)) return;
         }
 
-        await this.elementStore.traverse({ childElements: this.elementStore.childElements }, checkLocation);
+        await this.elementStore.traverse({ children: this.elementStore.children }, checkLocation);
     }
 
     resetRelative() {
@@ -318,13 +318,13 @@ export default class Move {
                 if (this.action.position === "bottom" ||
                     this.action.position === "right") {
                     this.elementStore.remove(this.element);
-                    const index = this.parent.childElements.indexOf(this.action.target) + 1;
+                    const index = this.parent.children.indexOf(this.action.target) + 1;
                     this.elementStore.add(this.element, this.parent, index)
                 }
                 else if (this.action.position === "top" ||
                     this.action.position === "left") {
                     this.elementStore.remove(this.element);
-                    const index = this.parent.childElements.indexOf(this.action.target);
+                    const index = this.parent.children.indexOf(this.action.target);
                     this.elementStore.add(this.element, this.parent, index)
                 }
             };
@@ -369,7 +369,7 @@ export default class Move {
         return false
     }
     checkIsSetChildElements(target){
-        if(!target.childElements){
+        if(!target.children){
             console.error('You can`t run changParent on an element that does not have child elements.')
             return true;
         }
@@ -377,7 +377,7 @@ export default class Move {
     }
 
     checkIsChild(element, target){
-        if(target.childElements){
+        if(target.children){
             const isParent = this.elementStore.findElement(element, target.id)
             if(isParent){
                 console.error('Parent elements cannot be inserted below child elements.')
@@ -403,7 +403,7 @@ export default class Move {
 
         const parent = this.elementStore.findParent( this.elementStore , target.id)
         this.elementStore.remove(element);
-        const index = parent.childElements.indexOf(target);
+        const index = parent.children.indexOf(target);
         this.elementStore.add(element, parent, index)
     }
 
@@ -413,7 +413,7 @@ export default class Move {
 
         const parent = this.elementStore.findParent( this.elementStore , target.id)
         this.elementStore.remove(element);
-        const index = parent.childElements.indexOf(target);
+        const index = parent.children.indexOf(target);
         this.elementStore.add(element, parent, index+1)
     }
 

@@ -21,7 +21,7 @@ export class Element {
     parent;
 
     isSelect = false;
-    childElements= undefined
+    children= undefined
     isUpdateParentArea = undefined
     contentEditable = undefined
     innerText = undefined
@@ -62,7 +62,7 @@ export class Element {
     initPropertyOnTag(props) {
 
         if (this.tag === 'section') {
-            this.childElements = [];
+            this.children = [];
             this.isUpdateParentArea = false;
         }
         else if(this.tag === 'text'){
@@ -96,7 +96,7 @@ export class Element {
         }
         const array = [
             'innerText',
-            'childElements',
+            'children',
             'contentEditable',
             'videoType',
             'frameCount',

@@ -6,13 +6,13 @@ const elementStore = new ElementStore();
 elementStore.add({tag:'section'})
 elementStore.add({tag:'text'})
 test('move', async () => {
-    const elements = elementStore.childElements
+    const elements = elementStore.children
     const mouse = {
         clientX:240,
         clientY:405,
     }
     const move = new Move({
-        childElements: elementStore.childElements,
+        children: elementStore.children,
         add: elementStore.add,
         remove: elementStore.remove,
     })

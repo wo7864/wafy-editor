@@ -45,7 +45,7 @@ export default observer(() => {
     const preview = () => {
         const data = {
             elements:{
-                childElements:[...elementStore.childElements],
+                children:[...elementStore.children],
             }
         }
         Converter(data);

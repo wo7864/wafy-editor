@@ -95,7 +95,7 @@ const ElemComponent = observer(({ element }) => {
                     </div>
                 }
 
-                {element.childElements && element.childElements.map(childElem => {
+                {element.children && element.children.map(childElem => {
                     return <ElemComponent
                         key={childElem.id}
                         element={childElem} />

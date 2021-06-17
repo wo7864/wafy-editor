@@ -25,41 +25,32 @@ styleProperty.forEach(property => styleJson[property] = primitive())
 styleJson.locked = list()
 createModelSchema(Style, styleJson)
 
-createModelSchema(ParamsAttr, {
-    required: primitive(),
-    default: primitive(),
-    value: primitive(),
-    detail: primitive(),
-    Unit: primitive(),
-    type: primitive(),
-})
-
 createModelSchema(Animation, {
     name: primitive(),
-    target: object(ParamsAttr),
-    duration: object(ParamsAttr),
-    timing: object(ParamsAttr),
-    easingFunction: object(ParamsAttr),
+    target: primitive(),
+    duration: primitive(),
+    timing: primitive(),
+    easingFunction: primitive(),
 
-    imageSrc: object(ParamsAttr),
-    imageWidth: object(ParamsAttr),
-    imageHeight: object(ParamsAttr),
-    cursor: object(ParamsAttr),
+    imageSrc:primitive(),
+    imageWidth: primitive(),
+    imageHeight:primitive(),
+    cursor: primitive(),
 
-    bright: object(ParamsAttr),
-    blur: object(ParamsAttr),
-    maxLetterSpacing: object(ParamsAttr),
-    height: object(ParamsAttr),
-    afterText: object(ParamsAttr),
+    bright:primitive(),
+    blur:primitive(),
+    maxLetterSpacing: primitive(),
+    height: primitive(),
+    afterText: primitive(),
 
-    color: object(ParamsAttr),
-    backgroundColor: object(ParamsAttr),
+    color:primitive(),
+    backgroundColor: primitive(),
 
-    gap: object(ParamsAttr),
-    cutCount: object(ParamsAttr),
+    gap: primitive(),
+    cutCount: primitive(),
 
-    start:object(ParamsAttr),
-    end:object(ParamsAttr),
+    start:primitive(),
+    end:primitive(),
 })
 
 createModelSchema(Animations, {
@@ -78,7 +69,7 @@ createModelSchema(Element, {
     style: object(Style),
     animation: object(Animations),
     isSelect: primitive(),
-    childElements: list(object(Element)),
+    children: list(object(Element)),
     resizeHandler: primitive(),
     contextMenu: primitive(),
     src:primitive(),

@@ -96,9 +96,9 @@ const ElementButton = observer(({ element, depth }) => {
     )
 })
 
-const ToggleChildElementsButton = observer(({ isOpen, toggle, childElements }) => {
-    if (childElements === undefined) return <></>
-    if (!childElements.length) return <></>
+const ToggleChildElementsButton = observer(({ isOpen, toggle, children }) => {
+    if (children === undefined) return <></>
+    if (!children.length) return <></>
 
     return (
         <button className={[
@@ -111,11 +111,11 @@ const ToggleChildElementsButton = observer(({ isOpen, toggle, childElements }) =
     )
 })
 
-const ChildElements = observer(({ elementStore, isOpen, childElements, depth }) => {
+const ChildElements = observer(({ elementStore, isOpen, children, depth }) => {
     if (!isOpen) return <></>
-    if (childElements === undefined) return <></>
+    if (children === undefined) return <></>
     return (
-        childElements.map((child) => {
+        children.map((child) => {
             return <SimpleElement
                 elementStore={elementStore}
                 key={child.id}
@@ -128,7 +128,7 @@ const ChildElements = observer(({ elementStore, isOpen, childElements, depth }) 
 const SimpleElement = observer(({ elementStore, element, depth }) => {
 
     const [isOpen, toggle] = useState(false);
-    const childElements = element.childElements;
+    const children = element.children;
 
     return (
         <div className={styles.tree}>
@@ -145,14 +145,14 @@ const SimpleElement = observer(({ elementStore, element, depth }) => {
                     depth={depth} />
                 <ToggleChildElementsButton
                     isOpen={isOpen}
-                    childElements={childElements}
+                    children={children}
                     toggle={toggle} />
             </SpaceBetweenLayout>
 
             <ChildElements
                 elementStore={elementStore}
                 isOpen={isOpen}
-                childElements={childElements}
+                children={children}
                 depth={depth} />
             <BetweenButton
                 element={element}
@@ -171,8 +171,8 @@ export default observer(() => {
 
     return (
         <div className={styles.treeContainer}>
-            { elementStore.childElements &&
-                elementStore.childElements.map((element, index) => {
+            { elementStore.children &&
+                elementStore.children.map((element, index) => {
                     return <SimpleElement
                         elementStore={elementStore}
                         key={element.id}

@@ -64,8 +64,8 @@ export default observer(() => {
                 onMouseDown={(e) => elementStore.deselect(e)}
                 onContextMenu={(e) => elementStore.contextMenu(e)}>
                 {
-                    elementStore.childElements &&
-                    elementStore.childElements.map((element, index) => {
+                    elementStore.children &&
+                    elementStore.children.map((element, index) => {
                         return <ElementComponent
                             key={element.id}
                             element={element} />

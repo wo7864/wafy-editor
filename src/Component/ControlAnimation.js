@@ -2,33 +2,42 @@ import { useStores } from '../states/Context';
 import { observer } from 'mobx-react';
 import { useState } from 'react';
 import finAnima from 'finished-animation/'
-import cloneDeep from 'lodash/cloneDeep'
 import easingFunction from '../animation/easingFunction'
 
 import animaStyles from '../static/css/Controller__Animation.module.css';
 import styles from '../static/css/Controller.module.css';
 import { RiImageAddFill } from "react-icons/ri";
 import { HiChevronDown } from "react-icons/hi";
-import {Assets} from './Tool'
+import { Assets } from './Tool'
+
+
+// 코드 진짜 개같이 짯네.
+
 const DetailContainer = observer(({ elementStore, event, assetStore, stageStore }) => {
     const element = elementStore.selectedElem;
     const anima = element.animation[event];
+    const finAllAnima = {
+        ...finAnima.commonData,
+        ...finAnima[element.tag + 'Data']
+    }
+    const originAnima = finAllAnima[anima.name].params
     const noInput = ['name', 'isScroll', 'start', 'end']
-    console.log(anima)
 
     if (anima && event === 'scroll') {
         if (anima.isScroll === undefined)
             anima.isScroll = false
 
         if (anima.start === null || anima.start === undefined) {
-            anima.start = {
+            originAnima.start = {
                 type: 'text',
                 default: 100
             }
-            anima.end = {
+            originAnima.end = {
                 type: 'text',
                 default: 500
             }
+            anima.start = 100
+            anima.end = 500
         }
     }
 
@@ -40,12 +49,12 @@ const DetailContainer = observer(({ elementStore, event, assetStore, stageStore 
                     onClick={() => toggle(!isView)}>
                     <RiImageAddFill />
                 </button>
-               
+
                 {isView &&
                     <div className={animaStyles.imagesModal}>
 
-                    <Assets tab="images"
-                        clickEvent={(image) => {anima[attr].value = image.src; toggle(false)}}/>
+                        <Assets tab="images"
+                            clickEvent={(image) => { anima[attr] = image.src; toggle(false) }} />
                     </div>
                 }
 
@@ -55,17 +64,12 @@ const DetailContainer = observer(({ elementStore, event, assetStore, stageStore 
 
 
     const InputText = ({ attr }) => {
-        if (anima[attr].value === undefined) {
-            anima[attr].value = anima[attr].default
-        }
-        let val = anima[attr].value
-        if (attr === 'target') val = 'self';
-        const [value, setValue] = useState(val)
-        anima[attr].value = value
+
+        const [value, setValue] = useState(anima[attr])
 
         let inputBox;
-
-        switch (anima[attr].type) {
+        
+        switch (originAnima[attr].type) {
             case 'select/ease':
                 inputBox =
                     (<select>
@@ -92,7 +96,7 @@ const DetailContainer = observer(({ elementStore, event, assetStore, stageStore 
                     <input type="text" value={value}
                         className={styles.midInput}
                         onChange={(e) => setValue(e.target.value)}
-                        onBlur={() => anima[attr].value = value}
+                        onBlur={() => anima[attr] = value}
                         readOnly={attr === 'target' ? ' true' : ''}
                     />
                 )
@@ -121,12 +125,10 @@ const DetailContainer = observer(({ elementStore, event, assetStore, stageStore 
         <div className={animaStyles.animationDetail}>
             {anima !== null ?
                 <>
-                    
                     <div className="contents-container">
-
                         {Object.keys(anima).map((attr, index) => {
                             if (noInput.includes(attr)) return ""
-                            if(!anima[attr]) return ""
+                            if (!anima[attr]) return ""
                             return (
                                 <InputText
                                     key={"attr_" + index}
@@ -146,8 +148,6 @@ const DetailContainer = observer(({ elementStore, event, assetStore, stageStore 
                                     attr={"end"} />
                             </>
                         }
-
-
                     </div>
                 </> :
                 <></>}
@@ -165,7 +165,7 @@ const AnimationList = ({ event, elementStore }) => {
     const [isOpen, toggle] = useState(false)
     const AnimationSelectorBox = ({ animations }) => {
 
-        if(!animations) return <></>;
+        if (!animations) return <></>;
         return (
             <>
                 {Object.keys(animations).map((key, index) => {
@@ -174,8 +174,18 @@ const AnimationList = ({ event, elementStore }) => {
                     return (
                         <button key={"animation-detail-" + index}
                             onClick={() => {
-                                const cloneAnima = cloneDeep(animations[key].params);
-                                elementStore.addAnimation(event, { name: key, ...cloneAnima })
+                                const anima = animations[key].params
+                                const newAnima = {}
+                                Object.keys(anima).forEach(attr => {
+                                    if (anima[attr].default) {
+                                        newAnima[attr] = anima[attr].default
+                                    } else {
+                                        newAnima[attr] = anima[attr].default
+                                    }
+                                })
+                                newAnima.name = key
+                                newAnima.target = 'self'
+                                elementStore.addAnimation(event, newAnima)
                                 toggle(false);
                             }}>
                             <span>{key}</span>
@@ -197,7 +207,7 @@ const AnimationList = ({ event, elementStore }) => {
             </button>
             { isOpen ?
                 <div className={animaStyles.listContainer}>
-                    <button onClick={() => { elementStore.addAnimation(event, null);toggle(false); }}>
+                    <button onClick={() => { elementStore.addAnimation(event, null); toggle(false); }}>
                         <span>없음</span>
                     </button>
                     <AnimationSelectorBox animations={finAnima['commonData']} />
