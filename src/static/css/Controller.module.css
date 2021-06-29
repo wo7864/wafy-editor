@@ -1,10 +1,10 @@
 .container{
     display: flex;
     flex-direction: column;
-    background-color: #f9f9fa;
+    background-color: #2a2a30;
     padding:0 15px;
     min-width:240px;
-    color:#343434;
+    color:#fff;
     overflow-y:scroll;
     overflow-x:auto;
     -ms-overflow-style: none; /* IE and Edge */
@@ -20,13 +20,13 @@
 
 .container input[type=text]{
     border:0;
-    border-bottom: 1px solid #343434;
+    border-bottom: 1px solid #fff;
     outline:0;
 
     background-color: transparent;
     font-size: 0.8rem;
 
-    color:#343434;
+    color:#fff;
     font-weight: 400;
     text-align: center;
 }
@@ -43,8 +43,8 @@
     height: 12px;
     width: 12px;
     border-radius: 50%;
-    border: 2px solid #343434;
-    background: #f9f9fa;
+    border: 2px solid #fff;
+    background: #2a2a30;
     margin-top: -4px;
 }
 
@@ -64,11 +64,11 @@
     padding: 5px;
     font-family: inherit;  
     border: 0;
-    border-bottom: solid 1px #343434;
+    border-bottom: solid 1px #fff;
     border-radius: 0px; 
     background-color: transparent;
 
-    color:#343434;
+    color:#fff;
     
 }
 .container select:focus{
@@ -94,7 +94,7 @@
 .tabContainer> button{
     padding:0 15px;
     font-size:1.4rem;
-    color:#343434;
+    color:#fff;
     transition:0.3s;
     border-radius: 5px;
 }
@@ -104,7 +104,7 @@
 
 .tabContainer> button.selectedTab{
     box-shadow:  inset 3px 3px 5px -2px rgba(0, 0, 0, 0.1),
-    inset -3px -3px 10px 5px #e0e0e288;
+    inset -3px -3px 10px 5px #242426bb;
 }
 
 
@@ -145,7 +145,7 @@
     position:relative;
     margin:0;
     padding:0;
-    color:#343434;
+    color:#fff;
     overflow:hidden;
     transition: 0.2s;
 }
@@ -166,16 +166,16 @@
     height:25px;
     padding:3px;
 
-    border:1px solid #343434;
+    border:1px solid #fff;
     background-color: #fff;
 
     font-size:0.6rem;
-    color:#343434;
+    color:#fff;
 
     transition: color 0.3s, background-color 0.3s;
 }
 .selectContainer>button:hover{
-    background-color: #343434;
+    background-color: #fff;
     color:#fff
 }
 
@@ -198,7 +198,7 @@
 .optionRows>div button{
     margin:5px;
     font-size:1.4rem;
-    color:#343434;
+    color:#fff;
     transition:0.3s;
     border-radius: 5px;
 }
@@ -207,7 +207,7 @@
 }
 button.selected{
     box-shadow:  inset 3px 3px 5px -2px rgba(0, 0, 0, 0.1),
-    inset -3px -3px 10px 5px #e0e0e288;
+    inset -3px -3px 10px 5px #242426bb;
 }
 
 button.locked{
@@ -233,7 +233,7 @@ button.locked{
     margin: 10px;
 
     border-radius: 5px;
-    border:1px solid #343434;
+    border:1px solid #fff;
 }
 .picker{
     position:fixed;
@@ -259,7 +259,7 @@ button.locked{
     margin-top:10px;
     width:100px;
     height:100px;
-    border:1px solid #343434;
+    border:1px solid #fff;
     border-radius: 10px;
     background-color: #fff;
     cursor:crosshair;
@@ -267,7 +267,7 @@ button.locked{
 .shadowExample{
     width:40px;
     height:40px;
-    background-color: #343434;
+    background-color: #343436;
     pointer-events: none;
 }
 .shadowOptionContainer{

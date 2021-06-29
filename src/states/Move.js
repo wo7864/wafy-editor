@@ -1,4 +1,5 @@
 import styles from '../static/css/Elements.module.css'
+
 export default class Move {
     mouse
     rect
@@ -109,7 +110,7 @@ export default class Move {
         const createNearLine = (direction, child) => {
             const domChild = document.querySelector(`#${child.id}`);
             const nearCursor = document.createElement('div')
-            nearCursor.className = `near-cursor ${direction}`;
+            nearCursor.className = [styles.nearCursor, styles[direction]].join(' ');
             domChild.appendChild(nearCursor);
             this.action.position = direction;
             this.action.state = "moveLocation"
@@ -168,7 +169,7 @@ export default class Move {
                 target.id : 'stage';
             const hoverDomElem = document.body.querySelector(`#${id}`);
             const hover = document.createElement('div');
-            hover.className = "hover";
+            hover.className = styles.hover;
             hoverDomElem.appendChild(hover);
             this.action.target = target;
             this.action.state = "updateParent"
@@ -235,7 +236,7 @@ export default class Move {
             if (Math.abs(top - (line - clientStage.top)) <= 5) {
                 this.element.style.setStyle('top', line - clientStage.top)
                 const xGuide = document.createElement('div');
-                xGuide.className = 'x-guide';
+                xGuide.className = styles.xGuide;
                 xGuide.style.width = `${this.element.style.width / 2}px`;
                 xGuide.style.left = `${this.element.style.left - (this.element.style.width / 2)}px`;
                 xGuide.style.top = `${this.element.style.top}px`;
@@ -244,7 +245,7 @@ export default class Move {
             if (Math.abs((top + this.element.style.height) - (line - clientStage.top)) <= 5) {
                 this.element.style.setStyle('top', (line - clientStage.top) - this.element.style.height)
                 const xGuide = document.createElement('div');
-                xGuide.className = 'x-guide';
+                xGuide.className = styles.xGuide;
                 xGuide.style.width = `${this.element.style.width / 2}px`;
                 xGuide.style.left = `${this.element.style.left - (this.element.style.width / 2)}px`;
                 xGuide.style.top = `${this.element.style.top + this.element.style.height}px`;
@@ -256,7 +257,7 @@ export default class Move {
             if (Math.abs(left - (line - clientStage.left)) <= 5) {
                 this.element.style.setStyle('left', line - clientStage.left)
                 const yGuide = document.createElement('div');
-                yGuide.className = 'y-guide';
+                yGuide.className = styles.yGuide;
                 yGuide.style.height = `${this.element.style.height / 2}px`;
                 yGuide.style.top = `${this.element.style.top - (this.element.style.height / 2)}px`;
                 yGuide.style.left = `${this.element.style.left}px`;
@@ -265,17 +266,13 @@ export default class Move {
             if (Math.abs((left + this.element.style.width) - (line - clientStage.left)) <= 5) {
                 this.element.style.setStyle('left', (line - clientStage.left) - this.element.style.width)
                 const yGuide = document.createElement('div');
-                yGuide.className = 'y-guide';
+                yGuide.className = styles.yGuide;
                 yGuide.style.height = `${this.element.style.height / 2}px`;
                 yGuide.style.top = `${this.element.style.top - (this.element.style.height / 2)}px`;
                 yGuide.style.left = `${this.element.style.left + this.element.style.width}px`;
                 stage.appendChild(yGuide)
             }
         })
-
-
-        const yGuide = document.createElement('div');
-        yGuide.className = 'height-guide';
 
         const checkLocation = (element) => {
             if (element === this.element) return;
@@ -286,8 +283,8 @@ export default class Move {
     }
 
     resetRelative() {
-        const preHover = document.body.querySelector('.hover');
-        const preNearCursor = document.body.querySelector('.near-cursor');
+        const preHover = document.body.querySelector('.'+styles.hover);
+        const preNearCursor = document.body.querySelector('.'+styles.nearCursor);
         if (preHover) preHover.parentNode.removeChild(preHover);
         if (preNearCursor) preNearCursor.parentNode.removeChild(preNearCursor)
         this.action = {
@@ -302,8 +299,8 @@ export default class Move {
     }
 
     resetAbsolute() {
-        const xGuides = document.body.querySelectorAll('.x-guide');
-        const yGuides = document.body.querySelectorAll('.y-guide');
+        const xGuides = document.body.querySelectorAll('.'+styles.xGuide);
+        const yGuides = document.body.querySelectorAll('.'+styles.yGuide);
         xGuides.forEach(xGuide => xGuide.parentNode.removeChild(xGuide))
         yGuides.forEach(yGuide => yGuide.parentNode.removeChild(yGuide))
     }

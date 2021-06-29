@@ -1,6 +1,7 @@
 import {  action, makeObservable, observable } from "mobx";
 
 const animationAttrProperty = [
+    'type',
     'target',
     'duration',
     'timing',
@@ -39,8 +40,13 @@ export class Animation {
             this[attr] = null
             observableJson[attr] = observable
         })
+        observableJson.setParam = action;
         makeObservable(this, observableJson);
 
+    }
+
+    setParam(attr, value){
+        this[attr] = value;
     }
 
 }

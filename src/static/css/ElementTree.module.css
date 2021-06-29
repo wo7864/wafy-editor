@@ -3,7 +3,7 @@
     height: 100%;
     padding: 10px;
     color: #343434;
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 
 .treeContainer div {
@@ -23,20 +23,24 @@
     transition:0.2s;
     height:30px;
     margin:0px 0px;
+    color:#fff;
+
+    text-overflow: ellipsis;
 
     text-align: left;
     
 }
 .elementButton:hover, .over{
-    box-shadow: inset 3px 3px 5px -2px rgb(0 0 0 / 20%), inset -3px -3px 10px 5px #e0e0e244
+    box-shadow: inset 3px 3px 5px -2px rgb(0 0 0 / 20%), inset -3px -3px 20px 5px #242426
 }
 .elementButton.selected{
-    box-shadow: inset 3px 3px 5px -2px rgb(0 0 0 / 20%), inset -3px -3px 10px 5px #e0e0e2aa
+    box-shadow: inset 3px 3px 5px -2px rgb(0 0 0 / 20%), inset -3px -3px 20px 5px #242426
 }
 .elementButton *{
     pointer-events: none;
 }
 .toggleButton{
+    color:#fff;
     font-size:1.1rem;
     transition: transform 0.2s;
 }

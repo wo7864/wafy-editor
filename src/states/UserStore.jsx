@@ -18,9 +18,10 @@ export class UserStore {
 
     }
 
-    setUserData({ id, email, projects }) {
+    setUserData({ id, email, projects, project_id }) {
         this.id = id !== undefined ? id : this.id;
         this.email = email !== undefined ? email : this.email;
         this.projects = projects !== undefined ? projects : this.projects;
+        this.project_id = project_id !== undefined ? project_id : this.project_id;
     }
 }

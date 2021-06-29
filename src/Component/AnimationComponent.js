@@ -152,7 +152,7 @@ const DetailContainer = observer(({ elementStore, event, assetStore }) => {
                 inputBox = (
                     <input type="text" value={value}
                         onChange={(e) => setValue(e.target.value)}
-                        onBlur={() => anima[attr].value = value}
+                        onBlur={() => anima.setParam(attr, value)}
                         readOnly={attr === 'target' ? ' true' : ''}
                     />
                 )

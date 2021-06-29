@@ -71,42 +71,105 @@
 
 .updateParentArea{
     position:absolute;
-    width:100px;
-    height:100px;
-
+    padding:1rem;
     display:flex;
     justify-content: center;
     align-items: center;
-    background-color: #cdcdcd88;
 
+    background-color: #2a2a30;
+    color:#fff;
+    opacity:0.8;
     border-radius: 5px;
     border:1px solid #fff;
 
     font-size: 0.8rem;
     z-index: 10;
     overflow: hidden;
-    box-shadow: 5px 5px 5px #787878;
+    cursor:default;
 }
 .updateParentArea>*{
     mix-blend-mode:difference;
+}
 
-}
-.updateParentArea::after{
-    content:'';
-    position:absolute;
-    left:0px;
-    top:0px;
-    width:100%;
-    height:100%;
-    background-color: #bcbcbc;
-    transition: 2s;
-    transform:translateY(100%);
-
-}
-.updateParentArea:hover::after{
-    transform:translateY(0%);
-}
 .updateParentArea:hover{
-
-
+    opacity: 1;
 }
+
+
+.innerText {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    outline: 0;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+    white-space: pre-wrap;
+}
+
+.innerText:focus {
+    cursor: text;
+}
+
+.hover {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #343434;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
+.xGuide {
+    position: absolute;
+    height: 1px;
+    background: turquoise;
+}
+
+.yGuide {
+    position: absolute;
+    width: 1px;
+    background: turquoise;
+}
+
+.nearCursor {
+    position: absolute;
+    background: black;
+}
+
+.nearCursor.bottom {
+    bottom: 0px;
+    width: 100%;
+    height: 3px;
+}
+
+.nearCursor.top {
+    top: 0px;
+    width: 100%;
+    height: 3px;
+}
+.nearCursor.left {
+    top: 0px;
+    left: 0px;
+    width: 3px;
+    height: 100%;
+}
+
+.nearCursor.right {
+    top: 0px;
+    right: 0px;
+    width: 3px;
+    height: 100%;
+}
+

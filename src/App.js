@@ -21,7 +21,11 @@ import './static/css/App.css';
 
 const Contents = observer(() => {
 
-	const { windowStore, userStore } = useStores();
+	const { windowStore, 
+		userStore, 
+		elementStore,
+		assetStore
+	} = useStores();
 	const { project_id } = useParams();
 
 	const { data, error, isLoading } = useAsync({
@@ -31,9 +35,18 @@ const Contents = observer(() => {
 	if (isLoading) return <Loading />;
 	if (error) return <div>에러가 발생했습니다</div>;
 	if (!data) return <></>;
-	console.log(data);
 
-	userStore.setUserData(data.user)
+	userStore.setUserData({
+		...data.user,
+		project_id:project_id
+	})
+	elementStore.load(data.project.data)
+	
+	const assets = data.project.assets
+	assetStore.initImages()
+	assetStore.initVideos()
+	assets.images.forEach(image => assetStore.addImage(image))
+	assets.videos.forEach(video => assetStore.addVideo(video))
 
 	return (
 		<div className="container">

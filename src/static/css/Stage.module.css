@@ -1,0 +1,71 @@
+.stageContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #121214;
+}
+
+.stage {
+    position: relative;
+    padding: 0;
+    overflow: scroll;
+    border: 1px solid black;
+    background-color: #fff;
+}
+
+.stage::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.stage::-webkit-scrollbar-track {
+    background: rgba(240, 240, 230, 0.8);
+}
+
+.stage::-webkit-scrollbar-track-piece {
+    display: none;
+}
+
+.stage::-webkit-scrollbar-button {
+    display: none;
+}
+
+/* Add a thumb */
+
+.stage::-webkit-scrollbar-thumb {
+    background: rgba(150, 150, 150, 0.3);
+    border-radius: 5px;
+}
+
+.stageWidthController{
+    width:5px;
+    transition: 0.3s;
+}
+.stageWidthController.left:hover, .stageWidthController.left.resizing{
+    transform: scaleX(2.5) translateX(-1px);
+    background-color: #343434;
+}
+.stageWidthController.right:hover, .stageWidthController.right.resizing{
+    transform: scaleX(2.5) translateX(1px);
+    background-color: #343434;
+}
+
+
+.selectedBox {
+    position: absolute;
+}
+
+.elemOutline {
+    display: none;
+    position: absolute;
+}
+
+.selected {
+    z-index: 2;
+}
+
+.selected .elemOutline {
+    display: block;
+}

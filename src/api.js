@@ -1,10 +1,11 @@
 import axios from 'axios';
+import {
+    API_URL,
+    PROJECTS_URL,
+    ASSETS_URL,
+} from './util/constant'
 
-const SERVER_URL = "http://localhost:8080"
-const API_URL = `${SERVER_URL}/api`
-const PROJECTS_URL = `${SERVER_URL}/api/users/projects`
-
-export const initData = async ({project_id}) => {
+export const initData = async ({ project_id }) => {
     const url = `${API_URL}/auth/user`;
 
     const user_res = await axios.get(
@@ -18,9 +19,57 @@ export const initData = async ({project_id}) => {
     )
 
     return {
-        user:user_res.data.user,
+        user: user_res.data.user,
         project: project_res.data,
 
     }
 
+}
+
+
+export const saveProject = async (id, project_id, data) => {
+    const url = `${PROJECTS_URL}/save/${id}/${project_id}`;
+    return await axios.patch(
+        url,
+        { data: data },
+        { withCredentials: true }
+    );
+}
+
+export const addAssetImage = async (id, project_id, form) => {
+    const url = `${ASSETS_URL}/images/${id}/${project_id}`;
+
+    return await axios.post(
+        url,
+        form,
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }
+    )
+}
+
+export const addAssetVideo = async (id, project_id, form) => {
+    const url = `${ASSETS_URL}/videos/${id}/${project_id}`;
+
+    return await axios.post(
+        url,
+        form,
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }
+    )
+}
+
+export const splitVideo = async (id, project_id, filename) => {
+    const url = `${ASSETS_URL}/videos/split/${id}/${project_id}/${filename}`;
+
+    const res = await axios.get(url)
+    .catch(e => {
+        console.error(e)
+    })
+    return res;
 }

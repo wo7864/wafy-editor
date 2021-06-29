@@ -84,7 +84,7 @@ const ElemComponent = observer(({ element }) => {
 
 
                 {element.innerText &&
-                    <div className="inner-text"
+                    <div className={styles.innerText}
                         suppressContentEditableWarning={true}
                         contentEditable={element.contentEditable ? true : false}
                         onKeyDown={element.divToBr}

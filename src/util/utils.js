@@ -14,3 +14,12 @@ export function addNumberUnit(string) {
     }
     return string;
 }
+
+export const traverse = (element, func) => {
+
+    if (!element.children) return;
+    element.children.forEach(child => {
+        func(child, element);
+        traverse(child, func);
+    })
+}
