@@ -78,7 +78,7 @@ const ViewCreator = (elements) => {
         BODY.appendChild(closeFrame);
 
 
-        const funcURL = '../assets/js/animation/';
+        const funcURL = './assets/';
 
 
         const addScript = (url) => {

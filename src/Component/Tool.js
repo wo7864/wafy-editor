@@ -16,9 +16,28 @@ import { observer } from 'mobx-react';
 
 
 
-export const Assets = ({ tab, changeTab, clickEvent }) => {
+export const Assets = observer(({ tab, changeTab, clickEvent }) => {
     const { elementStore, assetStore } = useStores();
 
+
+    const addAsset = (type) => {
+        const f = document.createElement('input')
+        f.type = 'file'
+        f.addEventListener('change', (e) => {
+            const file = e.target.files[0]
+            const fileReader = new FileReader()
+            if (file.type.match(type.slice(0, 5))) {
+                fileReader.onload = () => {
+                    if(type === 'images')
+                        assetStore.addImage(fileReader.result)
+                    else
+                        assetStore.addVideo(fileReader.result)
+                }
+                fileReader.readAsDataURL(file)
+            }
+        })
+        f.click()
+    }
 
     return (
         <div className={styles.assetsContainer}>
@@ -32,6 +51,10 @@ export const Assets = ({ tab, changeTab, clickEvent }) => {
                 <></>
             }
             <div className={styles.contentsContainer}>
+                <button className={styles.addAssetButton}
+                    onClick={() => addAsset(tab)}>
+                    +
+                </button>
                 {tab === "images" ?
                     assetStore.images.map((image, index) => {
                         return (
@@ -67,7 +90,7 @@ export const Assets = ({ tab, changeTab, clickEvent }) => {
         </div>
     )
 
-}
+})
 
 
 

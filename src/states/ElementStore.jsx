@@ -182,7 +182,6 @@ export class ElementStore {
 
         // 선택
         this.selectedElem = element;
-        console.log(element)
         this.selectedElem.select();
 
         if (e) {

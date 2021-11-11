@@ -123,3 +123,13 @@
 .contentsContainer img:hover {
     transform: scale(1.2, 1.2);
 }
+.addAssetButton{
+    border:1px solid #343434;
+    font-size:2rem;
+    transition:0.2s;
+    cursor:pointer;
+}
+.addAssetButton:hover{
+    background-color: #343434;
+    color:#fff;
+}

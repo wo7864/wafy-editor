@@ -24,16 +24,16 @@ const Contents = observer(() => {
 	const { windowStore, userStore } = useStores();
 	const { project_id } = useParams();
 
-	const { data, error, isLoading } = useAsync({
-		promiseFn: initData,
-		project_id:project_id
-	});
-	if (isLoading) return <Loading />;
-	if (error) return <div>에러가 발생했습니다</div>;
-	if (!data) return <></>;
-	console.log(data);
+	// const { data, error, isLoading } = useAsync({
+	// 	promiseFn: initData,
+	// 	project_id:project_id
+	// });
+	// if (isLoading) return <Loading />;
+	// if (error) return <div>에러가 발생했습니다</div>;
+	// if (!data) return <></>;
+	
 
-	userStore.setUserData(data.user)
+	// userStore.setUserData(data.user)
 
 	return (
 		<div className="container">
@@ -56,9 +56,11 @@ const Loading = () => {
 
 const App = () => {
 
+	//<Route path="/:project_id">
+
 	return (
 		<Router>
-			<Route path="/:project_id">
+			<Route path="/">
 				<Contents />
 			</Route>
 		</Router>
