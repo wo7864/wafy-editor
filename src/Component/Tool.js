@@ -43,9 +43,9 @@ export const Assets = observer(({ tab, changeTab, clickEvent }) => {
         <div className={styles.assetsContainer}>
             {changeTab ?
                 <div className={styles.tabContainer}>
-                    <button className={tab === "images" ? "selected-tab" : ""}
+                    <button className={tab === "images" ? styles.selectedTab : ""}
                         onClick={() => changeTab('images')}>images</button>
-                    <button className={tab === "videos" ? "selected-tab" : ""}
+                    <button className={tab === "videos" ? styles.selectedTab : ""}
                         onClick={() => changeTab('videos')}>videos</button>
                 </div> :
                 <></>

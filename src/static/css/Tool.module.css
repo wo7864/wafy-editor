@@ -94,7 +94,12 @@
     text-transform: capitalize;
 }
 
-.tabContainer button:hover, .tabContainer button.selected-tab {
+.tabContainer button:hover{
+    color: #fff;
+    background-color: #343434aa;
+}
+
+.tabContainer button.selectedTab {
     color: #fff;
     background-color: #343434;
 }

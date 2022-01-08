@@ -1,7 +1,6 @@
 import { makeObservable, observable } from "mobx";
+import { ASSETS_IMAGE_URL, ASSETS_VIDEO_URL } from "../api"
 
-const imageURL = '../assets/images/';
-const videoURL = '../assets/videos/';
 
 class ImageData{
     filename;
@@ -9,7 +8,7 @@ class ImageData{
         const file = filename.split('.')
         this.filename = file[0];
         this.extension = file[1];
-        this.src = imageURL+filename;
+        this.src = ASSETS_IMAGE_URL+filename;
     }
 }
 
@@ -19,8 +18,8 @@ class VideoData{
         const file = filename.split('.')
         this.filename = file[0];
         this.extension = file[1];
-        this.src =  videoURL+filename;
-        this.introSrc = videoURL+filename.split('.')[0]+".jpg";
+        this.src =  ASSETS_VIDEO_URL+filename;
+        this.introSrc = ASSETS_VIDEO_URL+filename.split('.')[0]+".jpg";
         this.frameCount = frameCount;
 
     }

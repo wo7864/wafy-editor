@@ -33,11 +33,11 @@ const Converter = async ({ elements }) => {
 
     })
 
-    var link = document.createElement('a');
-    link.download = 'index.html';
-    var blob = new Blob([htmlFrame.srcdoc], {type: 'text/plain'});
-    link.href = window.URL.createObjectURL(blob);
-    link.click();
+    // var link = document.createElement('a');
+    // link.download = 'index.html';
+    // var blob = new Blob([htmlFrame.srcdoc], {type: 'text/plain'});
+    // link.href = window.URL.createObjectURL(blob);
+    // link.click();
 
     document.body.prepend(htmlFrame);
 
