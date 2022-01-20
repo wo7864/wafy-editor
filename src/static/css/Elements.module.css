@@ -72,11 +72,14 @@
 .updateParentArea{
     position:absolute;
     width:100px;
-    height:100px;
+    height:20px;
 
     display:flex;
     justify-content: center;
     align-items: center;
+
+}
+.hoverArea{
     background-color: #cdcdcd88;
 
     border-radius: 5px;
@@ -91,7 +94,7 @@
     mix-blend-mode:difference;
 
 }
-.updateParentArea::after{
+.hoverArea::after{
     content:'';
     position:absolute;
     left:0px;
@@ -103,7 +106,7 @@
     transform:translateY(100%);
 
 }
-.updateParentArea:hover::after{
+.hoverArea:hover::after{
     transform:translateY(0%);
 }
 .updateParentArea:hover{

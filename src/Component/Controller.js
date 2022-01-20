@@ -35,7 +35,7 @@ import {
 import styles from '../static/css/Controller.module.css';
 
 
-const ControlButton = observer(({ element, attr, value, icon, style }) => {
+const ControlButton = observer(({ element, attr, value, icon, style, additionalEvent = () => { } }) => {
 
     return <button className={[
         element.style[attr] === value ? styles.selected : '',
@@ -44,8 +44,8 @@ const ControlButton = observer(({ element, attr, value, icon, style }) => {
         onClick={() => {
             if (!element.style.locked.includes(attr))
                 element.style.setStyle(attr, value)
-        }
-        }
+            additionalEvent();
+        }}
         style={style}>
         {icon}
     </button>
@@ -264,7 +264,11 @@ const PositionController = observer(({ elementStore }) => {
                         element={element}
                         attr="position"
                         value="relative"
-                        icon={<MdGridOn />} />
+                        icon={<MdGridOn />}
+                        additionalEvent={() => {
+                            element.style.setStyle('left', 0)
+                            element.style.setStyle('top', 0)
+                        }} />
                     <ControlButton
                         element={element}
                         attr="position"

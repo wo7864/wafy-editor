@@ -200,6 +200,7 @@ export default class Move {
 
     }
 
+    // Absolute 일 때, 자식 노드를 추가하기 위한 인터페이스 
     createUpdateParentArea() {
         const clientElement = document.querySelector(`#${this.element.id}`).getBoundingClientRect();
         const top = clientElement.top - window.innerHeight / 2
