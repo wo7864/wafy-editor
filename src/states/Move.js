@@ -38,6 +38,7 @@ export default class Move {
         if (mouse.target.classList.contains(styles.resizeHandle)) return;
         this.parent = this.elementStore.findParent( this.elementStore , element.id)
         this.element = element
+        element.style.pointerEvents = 'none' 
         this.mouse = mouse
         this.rect = {
             x: element.style.left,
@@ -80,6 +81,7 @@ export default class Move {
 
     end = () => {
         if (!this.element) return
+        this.element.style.pointerEvents = undefined
         document.body.removeEventListener('mousemove', this.move, true);
         switch (this.element.style.position) {
             case "absolute":
@@ -355,8 +357,6 @@ export default class Move {
     setUpdateParent(element) {
         this.action.state = "updateParent";
         this.action.target = element;
-
-
     }
     unSetUpdateParent() {
         this.initAction()

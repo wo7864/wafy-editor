@@ -14,13 +14,16 @@ const UpdateParentArea = observer(({ element }) => {
     }
     if (!element.isUpdateParentArea) return <></>
     return (
-        <div className={styles.updateParentArea} style={rectStyle}>
+        <div className={styles.updateParentArea} style={rectStyle}
+        onMouseEnter={() => move.setUpdateParent(element)}
+        >
             <span>{element.id}</span>
-            <span className={styles.hoverArea}
+            <div className={styles.hoverArea}
                 
                 onMouseEnter={() => move.setUpdateParent(element)}
                 onMouseLeave={() => move.unSetUpdateParent()}>
-            </span>
+                    넣기
+            </div>
 
         </div>
     )
