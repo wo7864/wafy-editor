@@ -172,7 +172,6 @@ export class ElementStore {
         if (element.isLock) return;
 
         this.isContextMenu = null;
-
         // 선택 취소
         if (this.selectedElem) {
             if (this.selectedElem === element && this.isEditText) return;

@@ -8,7 +8,8 @@ const styleProperty = [
     'borderRadius', 'borderWidth', 'borderColor', 'borderStyle',
     'backgroundColor', 'color',
     'textAlign', 'fontFamily', 'fontWeight', 'fontSize', 'fontStyle', 'textDecoration',
-    'boxShadow', 'backdropFilter',
+    'boxShadow', 'backdropFilter', 
+    'pointerEvents'
 ]
 
 

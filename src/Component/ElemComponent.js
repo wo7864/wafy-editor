@@ -15,7 +15,6 @@ const UpdateParentArea = observer(({ element }) => {
     if (!element.isUpdateParentArea) return <></>
     return (
         <div className={styles.updateParentArea} style={rectStyle}
-        onMouseEnter={() => move.setUpdateParent(element)}
         >
             <span>{element.id}</span>
             <div className={styles.hoverArea}
@@ -32,7 +31,7 @@ const UpdateParentArea = observer(({ element }) => {
 const ElemComponent = observer(({ element }) => {
     const { elementStore } = useStores();
     if (element.tag === 'image' || element.tag === 'video') {
-
+        
         return (
             <div
                 id={element.id} role="listitem"

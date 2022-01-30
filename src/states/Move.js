@@ -81,7 +81,7 @@ export default class Move {
 
     end = () => {
         if (!this.element) return
-        this.element.style.pointerEvents = undefined
+        this.element.style.pointerEvents = 'auto'
         document.body.removeEventListener('mousemove', this.move, true);
         switch (this.element.style.position) {
             case "absolute":
