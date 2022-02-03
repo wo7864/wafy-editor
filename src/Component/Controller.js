@@ -4,6 +4,7 @@ import { useStores } from '../states/Context';
 import { observer } from 'mobx-react';
 import { SketchPicker } from 'react-color';
 import ControlAnimation from './ControlAnimation'
+import { ValidElemId } from '../util/validator';
 import {
     BsBoundingBoxCircles,
     BsSubtract,
@@ -135,8 +136,13 @@ const IdController = observer(({ elementStore }) => {
     const [editable, toggle] = useState(false);
     const [id, setId] = useState(element.id)
     const blur = () => {
-        element.setProperty('id', id)
-        toggle(false);
+        if(!ValidElemId(id))
+            alert('no!')
+        else{
+            element.setProperty('id', id)
+            toggle(false);
+            alert('yes!')
+        }
     }
     return (
         <div className={styles.optionId}>

@@ -78,11 +78,14 @@
 .optionId{
     font-size: 1rem;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-bottom:10px;
 }
 .inputId{
-    
+    font-size:1rem !important;
+    text-align: left !important;
+    max-width: 80%;
 }
 .tabContainer{
     margin-bottom:10px; 
