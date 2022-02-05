@@ -137,11 +137,10 @@ const IdController = observer(({ elementStore }) => {
     const [id, setId] = useState(element.id)
     const blur = () => {
         if(!ValidElemId(id))
-            alert('no!')
+            alert('id 값이 올바르지 않습니다!')
         else{
             element.setProperty('id', id)
             toggle(false);
-            alert('yes!')
         }
     }
     return (
@@ -161,7 +160,7 @@ const IdController = observer(({ elementStore }) => {
                 <>
                     <span>{element.id}</span>
                     <GoPencil
-                        onClick={() => toggle(true)}
+                        onClick={() => {setId(element.id); toggle(true);}}
                         style={{ marginLeft: 5 }} />
                 </>
             }

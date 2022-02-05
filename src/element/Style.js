@@ -32,6 +32,7 @@ const defaultStyle = {
         borderWidth: 0,
         borderColor: 'rgba(255, 255, 255, 0)',
         borderStyle: 'solid',
+        pointerEvents:'auto',
 
     },
 

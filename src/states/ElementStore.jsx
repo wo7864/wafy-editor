@@ -92,6 +92,11 @@ export class ElementStore {
     }
     
     onDelete(){
+        const {tagName, type, className} = document.activeElement
+        if((tagName == 'INPUT' && type =='text') ||
+            className == 'inner-text')
+            return
+
         this.remove(this.selectedElem)
         this.selectedElem = null
     }

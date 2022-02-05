@@ -95,6 +95,7 @@ export class Element {
             hideUpdateParentArea:action,
         }
         const array = [
+            'id',
             'innerText',
             'children',
             'contentEditable',

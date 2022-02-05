@@ -38,7 +38,6 @@ export default class Move {
         if (mouse.target.classList.contains(styles.resizeHandle)) return;
         this.parent = this.elementStore.findParent( this.elementStore , element.id)
         this.element = element
-        element.style.pointerEvents = 'none' 
         this.mouse = mouse
         this.rect = {
             x: element.style.left,
@@ -59,6 +58,7 @@ export default class Move {
         //requestAnimationFrame(() => {
         //this.action.target = null;
         if (!this.element) return
+        this.element.style.setStyle('pointerEvents', 'none') 
         this.element.style.setStyle('left', e.clientX - (this.mouse.clientX - this.rect.x))
         this.element.style.setStyle('top', e.clientY - (this.mouse.clientY - this.rect.y))
 
@@ -81,7 +81,7 @@ export default class Move {
 
     end = () => {
         if (!this.element) return
-        this.element.style.pointerEvents = 'auto'
+        this.element.style.setStyle('pointerEvents', 'auto')
         document.body.removeEventListener('mousemove', this.move, true);
         switch (this.element.style.position) {
             case "absolute":
