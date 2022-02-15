@@ -124,3 +124,94 @@
 .hoverArea:hover::after{
     transform:translateX(0%);
 } */
+
+    /* background-color: #2a2a30;
+    color:#fff;
+    opacity:0.8;
+    border-radius: 5px;
+    border:1px solid #fff;
+
+    font-size: 0.8rem;
+    z-index: 10;
+    overflow: hidden;
+    cursor:default;
+}
+.updateParentArea>*{
+    mix-blend-mode:difference;
+}
+
+.updateParentArea:hover{
+    opacity: 1;
+}
+
+
+.innerText {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    outline: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    white-space: pre-wrap;
+} */
+/* 
+.innerText:focus {
+    cursor: text;
+}
+
+.hover {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #343434;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
+.xGuide {
+    position: absolute;
+    height: 1px;
+    background: turquoise;
+}
+
+.yGuide {
+    position: absolute;
+    width: 1px;
+    background: turquoise;
+}
+
+.nearCursor {
+    position: absolute;
+    background: black;
+}
+
+.nearCursor.bottom {
+    bottom: 0px;
+    width: 100%;
+    height: 3px;
+}
+
+.nearCursor.top {
+    top: 0px;
+    width: 100%;
+    height: 3px;
+}
+.nearCursor.left {
+    top: 0px;
+    left: 0px;
+    width: 3px;
+    height: 100%;
+}
+
+.nearCursor.right {
+    top: 0px;
+    right: 0px;
+    width: 3px;
+    height: 100%;
+}
+ */

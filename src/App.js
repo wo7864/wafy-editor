@@ -21,7 +21,11 @@ import './static/css/App.css';
 
 const Contents = observer(() => {
 
-	const { windowStore, userStore } = useStores();
+	const { windowStore, 
+		userStore, 
+		elementStore,
+		assetStore
+	} = useStores();
 	const { project_id } = useParams();
 
 	// const { data, error, isLoading } = useAsync({

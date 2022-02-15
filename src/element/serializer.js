@@ -7,7 +7,7 @@ import {
     deserialize,
 } from "serializr"
 import {Element} from './Element'
-import {Animations, Animation, ParamsAttr} from './Animation'
+import {Animations, Animation} from './Animation'
 import {Style} from './Style'
 
 const styleProperty = [
@@ -68,11 +68,11 @@ createModelSchema(Element, {
     innerText: primitive(),
     style: object(Style),
     animation: object(Animations),
+    src:primitive(),
     isSelect: primitive(),
     children: list(object(Element)),
     resizeHandler: primitive(),
     contextMenu: primitive(),
-    src:primitive(),
     introSrc:primitive(),
     videoType:primitive(),
     scrollStart:primitive(),

@@ -1,11 +1,13 @@
 import { action, makeObservable, observable } from "mobx";
 import { Element } from '../element/Element';
 import { toJSON, toOBJ } from '../element/serializer'
-import template from '../static/templates/template.json'
 import History from './History'
 import Clipboard from './Clipboard'
 import Move from './Move'
 import Resize from './Resize'
+import { saveProject } from "../api";
+
+import stageStyles from '../static/css/Stage.module.css';
 
 export class ElementStore {
     rootStore;
@@ -133,36 +135,23 @@ export class ElementStore {
     }
 
 
-    save() {
+    async save(id, project_id) {
         if (this.selectedElem) {
             this.selectedElem.deselect();
             this.selectedElem = null;
         }
         this.isEditText = false;
         const json = JSON.stringify(toJSON(this.children));
-        const filename = 'template.json'
-        const file = new Blob([json], { type: 'text/plain' });
-
-        const a = document.createElement("a"),
-            url = URL.createObjectURL(file);
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        setTimeout(function () {
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-        }, 0);
-
+        await saveProject(id, project_id, json)
     }
 
-    load() {
-        const data = toOBJ(template)
-        if (data) {
-            this.children.length = 0;
-            this.children.push(...data)
-            this.selectedElem = data.filter(elem => elem.isSelect)[0]
-        }
+    load(json_data) {
+        if (!json_data) console.error('no data!');
+
+        const data = toOBJ(json_data)        
+        this.children.length = 0;
+        this.children.push(...data)
+        this.selectedElem = data.filter(elem => elem.isSelect)[0]
     }
 
 
@@ -198,7 +187,7 @@ export class ElementStore {
     deselect(e) {
 
         // 타겟이 Stage 빈 칸이 아니라면 함수 중단
-        if (e.target !== document.querySelector(".stage")) return;
+        if (e.target !== document.querySelector(`.${stageStyles.stage}`)) return;
         this.isContextMenu = null;
 
         // 현재 선택된 요소가 없으면 함수 중단

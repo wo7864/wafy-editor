@@ -1,3 +1,9 @@
+import {
+    useState,
+    useRef
+} from 'react';
+import { observer } from 'mobx-react';
+
 import { useStores } from '../states/Context';
 import styles from '../static/css/Tool.module.css';
 
@@ -11,14 +17,35 @@ import videoImg from '../static/images/video.svg';
 import filesImg from '../static/images/files.svg';
 import plusImg from '../static/images/plus.svg';
 import elementImg from '../static/images/element.svg';
-import { useState } from 'react';
-import { observer } from 'mobx-react';
+import {
+    addAssetImage,
+    addAssetVideo,
+} from '../api';
+
 
 
 
 export const Assets = observer(({ tab, changeTab, clickEvent }) => {
-    const { elementStore, assetStore } = useStores();
+    const { elementStore, assetStore, userStore } = useStores();
+    const fileInputRef = useRef(null)
 
+    const selectImage = () => {
+        fileInputRef.current.click();
+    }
+    const addImage = async (e) => {
+        const form = new FormData()
+        form.append('image', fileInputRef.current.files[0])
+        const res = await addAssetImage(userStore.id, userStore.project_id, form)
+        assetStore.addImage(res.data)
+    }
+
+    const addVideo = async (e) => {
+        const form = new FormData()
+        form.append('video', fileInputRef.current.files[0])
+        const  res = await addAssetVideo(userStore.id, userStore.project_id, form)
+        console.log(res)
+        assetStore.addVideo(res.data)
+    }
 
     const addAsset = (type) => {
         const f = document.createElement('input')
@@ -56,36 +83,58 @@ export const Assets = observer(({ tab, changeTab, clickEvent }) => {
                     +
                 </button>
                 {tab === "images" ?
-                    assetStore.images.map((image, index) => {
-                        return (
-                            <button key={"image_" + index}>
-                                <img src={image.src}
-                                    alt={"image_" + index}
-                                    onClick={clickEvent ?
-                                        () => clickEvent(image) :
-                                        () => elementStore.add({
-                                            tag: 'image',
-                                            src: image.src,
-                                        })} />
-                            </button>
-                        )
-                    }) : ""}
+                    <>
+                        <input type="file"
+                            ref={fileInputRef}
+                            className={styles.imageInput}
+                            onChange={addImage} />
+                        <button className={styles.addAsset}
+                            onClick={selectImage}>
+                            +
+                        </button>
+                        {
+                            assetStore.images.map((image, index) => {
+                                return (
+                                    <button key={"image_" + index}>
+                                        <img src={image.src}
+                                            alt={"image_" + index}
+                                            onClick={clickEvent ?
+                                                () => clickEvent(image) :
+                                                () => elementStore.add({
+                                                    tag: 'image',
+                                                    src: image.src,
+                                                })} />
+                                    </button>
+                                )
+                            })
+                        }
+                    </> : ""}
 
                 {tab === "videos" ?
-                    assetStore.videos.map((video, index) => {
-                        return (
-                            <button key={"video_" + index}>
-                                <img src={video.introSrc}
-                                    alt={"video_" + index}
-                                    onClick={() => elementStore.add({
-                                        tag: 'video',
-                                        src: video.src,
-                                        introSrc: video.introSrc,
-                                        frameCount:video.frameCount,
-                                    })} />
-                            </button>
-                        )
-                    }) : ""}
+                    <>
+                        <input type="file"
+                            ref={fileInputRef}
+                            className={styles.imageInput}
+                            onChange={addVideo} />
+                        <button className={styles.addAsset}
+                            onClick={selectImage}>
+                            +
+                        </button>
+                        {assetStore.videos.map((video, index) => {
+                            return (
+                                <button key={"video_" + index}>
+                                    <img src={video.introSrc}
+                                        alt={"video_" + index}
+                                        onClick={() => elementStore.add({
+                                            tag: 'video',
+                                            src: video.src,
+                                            introSrc: video.introSrc,
+                                            frameCount: video.frameCount,
+                                        })} />
+                                </button>
+                            )
+                        })}
+                    </> : ""}
             </div>
         </div>
     )
@@ -132,9 +181,9 @@ export default observer(() => {
             top: stageStore.height / 2 + stageStore.scrollTop
         }
     }
-    
 
-    return (    
+
+    return (
         <div className={styles.toolContainer}>
             <div className={styles.defaultToolContainer}>
                 <div>

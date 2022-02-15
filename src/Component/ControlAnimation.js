@@ -9,11 +9,13 @@ import styles from '../static/css/Controller.module.css';
 import { RiImageAddFill } from "react-icons/ri";
 import { HiChevronDown } from "react-icons/hi";
 import { Assets } from './Tool'
+import { Animation } from '../element/Animation';
 
 
 // 코드 진짜 개같이 짯네.
 
-const DetailContainer = observer(({ elementStore, event, assetStore, stageStore }) => {
+const DetailContainer = observer(({  event }) => {
+    const {elementStore, stageStore } = useStores();
     const element = elementStore.selectedElem;
     const anima = element.animation[event];
     const finAllAnima = {
@@ -21,7 +23,7 @@ const DetailContainer = observer(({ elementStore, event, assetStore, stageStore 
         ...finAnima[element.tag + 'Data']
     }
     const originAnima = finAllAnima[anima.name].params
-    const noInput = ['name', 'isScroll', 'start', 'end']
+    const noInput = ['name', 'isScroll', 'start', 'end', 'type']
 
     if (anima && event === 'scroll') {
         if (anima.isScroll === undefined)
@@ -96,7 +98,7 @@ const DetailContainer = observer(({ elementStore, event, assetStore, stageStore 
                     <input type="text" value={value}
                         className={styles.midInput}
                         onChange={(e) => setValue(e.target.value)}
-                        onBlur={() => anima[attr] = value}
+                        onBlur={() => anima.setParam(attr, value)}
                         readOnly={attr === 'target' ? ' true' : ''}
                     />
                 )
@@ -163,8 +165,10 @@ const AnimationList = ({ event, elementStore }) => {
     //const [type, setType] = useState('common')
     const type = element.tag
     const [isOpen, toggle] = useState(false)
-    const AnimationSelectorBox = ({ animations }) => {
 
+
+    const AnimationSelectorBox = ({ type }) => {
+        const animations = finAnima[`${type}Data`];
         if (!animations) return <></>;
         return (
             <>
@@ -175,16 +179,13 @@ const AnimationList = ({ event, elementStore }) => {
                         <button key={"animation-detail-" + index}
                             onClick={() => {
                                 const anima = animations[key].params
-                                const newAnima = {}
+                                const newAnima = new Animation();
                                 Object.keys(anima).forEach(attr => {
-                                    if (anima[attr].default) {
-                                        newAnima[attr] = anima[attr].default
-                                    } else {
-                                        newAnima[attr] = anima[attr].default
-                                    }
+                                    newAnima.setParam(attr, anima[attr].default);
                                 })
-                                newAnima.name = key
-                                newAnima.target = 'self'
+                                newAnima.setParam('type', type)
+                                newAnima.setParam('name', key)
+                                newAnima.setParam('target', 'self')
                                 elementStore.addAnimation(event, newAnima)
                                 toggle(false);
                             }}>
@@ -210,8 +211,8 @@ const AnimationList = ({ event, elementStore }) => {
                     <button onClick={() => { elementStore.addAnimation(event, null); toggle(false); }}>
                         <span>없음</span>
                     </button>
-                    <AnimationSelectorBox animations={finAnima['commonData']} />
-                    <AnimationSelectorBox animations={finAnima[type + 'Data']} />
+                    <AnimationSelectorBox type="common"/>
+                    <AnimationSelectorBox type={type}/>
                 </div> :
                 <></>
             }
@@ -223,7 +224,7 @@ const AnimationList = ({ event, elementStore }) => {
 
 
 export default observer(() => {
-    const { elementStore, assetStore, stageStore } = useStores();
+    const { elementStore, stageStore } = useStores();
     const element = elementStore.selectedElem
     const [selectedEvent, changeEvent] = useState("view")
 
@@ -254,9 +255,6 @@ export default observer(() => {
             {
                 element.animation[selectedEvent] ?
                     <DetailContainer
-                        elementStore={elementStore}
-                        assetStore={assetStore}
-                        stageStore={stageStore}
                         event={selectedEvent} />
                     :
                     <></>

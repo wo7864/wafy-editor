@@ -87,17 +87,17 @@ const ElemComponent = observer(({ element }) => {
                 >
 
 
-                    {element.innerText &&
-                        <div className="inner-text"
-                            suppressContentEditableWarning={true}
-                            contentEditable={element.contentEditable ? true : false}
-                            onKeyDown={element.divToBr}
-                            onInput={element.setInnerText}
-                        >
-                            {!element.contentEditable ?
-                                element.innerText : element.tmpText}
-                        </div>
-                    }
+                {element.innerText &&
+                    <div className={styles.innerText}
+                        suppressContentEditableWarning={true}
+                        contentEditable={element.contentEditable ? true : false}
+                        onKeyDown={element.divToBr}
+                        onInput={element.setInnerText}
+                    >
+                        {!element.contentEditable ? 
+                        element.innerText : element.tmpText}
+                    </div>
+                }
 
                     {element.children && element.children.map(childElem => {
                         return <ElemComponent
