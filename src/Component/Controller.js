@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useStores } from '../states/Context';
 import { observer } from 'mobx-react';
 import ControlAnimation from './ControlAnimation'
-import { ValidElemId } from '../util/validator';
 import {
     BsBoundingBoxCircles,
     BsSubtract,

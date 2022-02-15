@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { observer } from 'mobx-react';
 
 import styles from '../../static/css/Controller.module.css';
+import { ValidElemId } from '../../util/validator';
 
 import {  BiCheck } from "react-icons/bi";
 import { GoPencil } from "react-icons/go";
@@ -11,8 +12,12 @@ export default observer(({ elementStore }) => {
     const [editable, toggle] = useState(false);
     const [id, setId] = useState(element.id)
     const blur = () => {
-        element.setProperty('id', id)
-        toggle(false);
+        if(!ValidElemId(id))
+            alert('id 값이 올바르지 않습니다!')
+        else{
+            element.setProperty('id', id)
+            toggle(false);
+        }
     }
     return (
         <div className={styles.optionId}>
@@ -31,7 +36,7 @@ export default observer(({ elementStore }) => {
                 <>
                     <span>{element.id}</span>
                     <GoPencil
-                        onClick={() => toggle(true)}
+                        onClick={() => {setId(element.id); toggle(true);}}
                         style={{ marginLeft: 5 }} />
                 </>
             }

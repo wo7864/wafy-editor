@@ -59,6 +59,7 @@ export default observer(() => {
 
     return (
         <div className={styles.headerContainer}>
+				
             <strong>WAFY</strong>
 
             <div className={styles.containerSizeController}>

@@ -1,4 +1,5 @@
 //export const SERVER_URL = "http://localhost:8080"
+export const IS_ONLINE = process.env.REACT_APP_USE_SERVER === "true"
 export const SERVER_URL = "http://13.124.112.205";
 export const API_URL = `${SERVER_URL}/api`
 export const PROJECTS_URL = `${SERVER_URL}/api/users/projects`

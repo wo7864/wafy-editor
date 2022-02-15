@@ -1,5 +1,3 @@
-import { makeObservable, observable } from "mobx";
-import { ASSETS_IMAGE_URL, ASSETS_VIDEO_URL } from "../api"
 import {
     makeObservable, 
     observable,
@@ -17,7 +15,7 @@ class ImageData{
         const file = filename.split('.')
         this.filename = file[0];
         this.extension = file[1];
-        this.src = ASSETS_IMAGE_URL+filename;
+        this.src = STATIC_IMAGES_URL+filename;
     }
 }
 
@@ -27,9 +25,9 @@ class VideoData{
         const file = filename.split('.')
         this.filename = file[0];
         this.extension = file[1];
-        this.src =  ASSETS_VIDEO_URL+filename;
-        this.introSrc = ASSETS_VIDEO_URL+filename.split('.')[0]+".jpg";
-        this.frameCount = frameCount;
+        this.src =  STATIC_VIDEOS_URL+filename;
+        this.introSrc = STATIC_VIDEOS_URL+filename.split('.')[0]+".jpg";
+        //this.frameCount = frameCount;
 
     }
 }
@@ -61,10 +59,12 @@ export class AssetStore {
         this.videos = []
     }
 
-    addImage(file){
+    // 둘중 하나 고르기
+
+    addImage_(file){
         this.images.push(new ImageData(file))
     }
-    addVideo(file){
+    addVideo_(file){
         this.videos.push(new VideoData(file))
     }
 

@@ -18,27 +18,40 @@ import Controller from './Component/Controller';
 import AnimationComponent from './Component/AnimationComponent';
 
 import './static/css/App.css';
+import { IS_ONLINE } from './util/constant';
 
-const Contents = observer(() => {
-
-	const { windowStore, 
+const Main = observer(() => {
+	const { 
+		windowStore, 
 		userStore, 
 		elementStore,
 		assetStore
 	} = useStores();
-	const { project_id } = useParams();
 
-	// const { data, error, isLoading } = useAsync({
-	// 	promiseFn: initData,
-	// 	project_id:project_id
-	// });
-	// if (isLoading) return <Loading />;
-	// if (error) return <div>에러가 발생했습니다</div>;
-	// if (!data) return <></>;
+	if(IS_ONLINE){
+		const { project_id } = useParams();
+
+		const { data, error, isLoading } = useAsync({
+			promiseFn: initData,
+			project_id:project_id
+		});
+		if (isLoading) return <Loading />;
+		if (error) return <div>에러가 발생했습니다</div>;
+		if (!data) return <></>;
+
+		userStore.setUserData({
+			...data.user,
+			project_id:project_id
+		})
+		elementStore.load(data.project.data)
+		
+		const assets = data.project.assets
+		assetStore.initImages()
+		assetStore.initVideos()
+		assets.images.forEach(image => assetStore.addImage(image))
+		assets.videos.forEach(video => assetStore.addVideo(video))
+	}
 	
-
-	// userStore.setUserData(data.user)
-
 	return (
 		<div className="container">
 			<Header />
@@ -52,6 +65,7 @@ const Contents = observer(() => {
 	)
 })
 
+
 const Loading = () => {
 	return (
 		<div>로딩중</div>
@@ -60,17 +74,18 @@ const Loading = () => {
 
 const App = () => {
 
+	if(IS_ONLINE){
+		return (
+			<Router>
+				<Route path="/">
+					<Main />
+				</Route>
+			</Router>
+		);
+	}else{
+		return <Main/>
+	}
 
-
-	//<Route path="/:project_id">
-
-	return (
-		<Router>
-			<Route path="/">
-				<Contents />
-			</Route>
-		</Router>
-	);
 }
 
 
